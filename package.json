@@ -1,0 +1,19 @@
+{
+  "name": "redisdb",
+  "version": "1.0.0",
+  "description": "Compresor de imagenes",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "redis": "^2.8.0",
+    "sharp": "^0.20.2",
+    "webp-converter": "^2.1.6",
+    "yargs": "^11.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jaime RC",
+  "license": "ISC"
+}
