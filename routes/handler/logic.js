@@ -21,7 +21,6 @@ const logic = {
                 } else {
                     result.status = "KO"
                 }
-                console.log(result)
                 resolve(result)
             })
         })
@@ -64,13 +63,10 @@ const logic = {
 
     setImageBySize(path, options) {
         return new Promise((resolve, reject) => {
-            console.log(path)
 
             let imagePath = path.split('/')
-            console.log(imagePath)
             imagePath.splice(imagePath.length - 2, 1)
             imagePath = imagePath.join('/')
-            console.log(imagePath)
 
             //path = this.extensionFileWebq(path, option.ext)
 

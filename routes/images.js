@@ -10,6 +10,7 @@ const mimeTypes = {
     'jpg': 'image/jpg',
     'gif': 'image/gif',
     'svg': 'application/image/svg+xml',
+    'webp': 'image/webp'
 };
 
 routes.route('/:folder/:subfolder/:file')
