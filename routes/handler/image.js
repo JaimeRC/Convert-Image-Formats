@@ -1,5 +1,23 @@
-const logic = require('../../logic/logic')
+/**
+ * Modulo para procerar una ruta de Express.
+ * En este modulo lo que se realizara es recibir una peticion con los parametros de la ruta
+ * para devolver una imagen almacenada en nuestro disco para poder devolverla en formato buffer
+ * con las opciones que nos pudieran pedir.
+ * 
+ * @param {Object}      mimeTypes   Objeto con todos los 'Content-Type' para la respuesta.
+ * @param {Object}      req         Objeto donde recibiremos los parametros y/o las query.
+ * @param {Response}    res         Objeto donde responderemos, enviando la informacion indicada. 
+ * @param {Object}      options     Objeto donde almacenaremos todas las variables que necesitaremos.
+ * @param {String}      folder      Parametro que indica la carpeta donde estara nuestras imagenes almacenadas.
+ * @param {String}      file        Parametro que indica el nombre del archivo a procesar.
+ * @param {String}      force       Query que indica si necesita la imagen forzada al tamaño indicado ignorando el AspectRatio.
+ * @param {String}      ext         Query que indica si necesita la imagen en formato WEBP.
+ * @param {String}      key         Nombre con que se va a almacenar el buffer de la imagen.
+ * @param {String}      path        Ruta donde esta almacenada nuestra imagen.
+ * @param {String}      baseBath    Ruta de nuestra aplicacion
+ */
 
+const logic = require('../../logic/logic')
 const argv = require('../../initServer').getArgvs()
 const basePath = argv.basePath
 
@@ -13,7 +31,7 @@ const mimeTypes = {
 }
 
 module.exports = (req, res) => {
-    const { params: { folder, subfolder, file } } = req
+    const { params: { folder, file } } = req
     let { query: { fit, force, ext } } = req
 
     if (ext === "" || ext === undefined) ext = "jpg"
@@ -23,8 +41,8 @@ module.exports = (req, res) => {
     if (force === 'force') `${nameFile[0]}_force`
     if (ext === 'webp') `${nameFile[0]}_webp`
 
-    let path = `${basePath}/${folder}/${subfolder}/${file}`
-    let key = `${basePath}/${folder}/${subfolder}/${nameFile.join('.')}`
+    let path = `${basePath}/${folder}/${file}`
+    let key = `${basePath}/${folder}/${nameFile.join('.')}`
 
     const options = {
         fit: fit,
@@ -33,7 +51,6 @@ module.exports = (req, res) => {
         key: key,
         path: path
     }
-
 
     logic.getExistImage(options)
         .then(result => {

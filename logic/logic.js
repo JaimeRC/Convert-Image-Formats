@@ -1,3 +1,7 @@
+/**
+ * 
+ */
+
 const { host, redisPort } = require('../initServer').getArgvs()
 const utils = require('./utils')
 
@@ -39,7 +43,7 @@ const logic = {
     setImage(options) {
         return new Promise((resolve, reject) => {
 
-            options = utils.setExtFileWebq(options)
+            options = utils.setExtFileWebp(options)
 
             sharp(options.path)
                 .toBuffer({ resolveWithObject: true })
@@ -58,14 +62,16 @@ const logic = {
     setImageBySize(options) {
         return new Promise((resolve, reject) => {
 
-            // options = utils.setExtFileWebq(option)
+            options = utils.setExtFileWebp(option)
+            
             const image = sharp(options.path)
-console.log(options)
+
             if (options.force === 'true') {
                 image.ignoreAspectRatio()
             } else {
                 image.max()
             }
+
             image
                 .resize(options.width, options.height)
                 .toBuffer({ resolveWithObject: true })
