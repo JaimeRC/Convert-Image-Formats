@@ -1,3 +1,11 @@
+/**
+ * Modulo para inicializar el servidor Express y la conexion con la base de datos Redis.
+ * 
+ * @param {Number}      port        Numero del puerto para el servidor Express.
+ * @param {Number}      redisPort   Numero del puerto para la conexion de la base de datos.
+ * @param {String}      host        Nombre del dominio que utilizaremos.
+ */
+
 const { port, host, redisPort} = require('./initServer').getArgvs()
 
 const redis = require('redis')

@@ -1,3 +1,9 @@
+/**
+ * Modulo que transforma una imagen en cualquier formato en una imagen con formato WEBP
+ * 
+ * @param {Object}      options     Objeto donde esta almacenado todas las opciones que necesitaremos.
+ */
+
 const webp = require('webp-converter')
 
 const utils = {

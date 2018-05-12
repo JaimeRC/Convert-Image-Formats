@@ -1,3 +1,6 @@
+/**
+ * Modulo que procesa y distribuye las peticiones recibidas.
+ */
 
 const express = require('express')
 const routes = express.Router()
