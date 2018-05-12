@@ -8,7 +8,7 @@ const webp = require('webp-converter')
 
 const utils = {
 
-    async setExtFileWebq(options) {
+    async setExtFileWebp(options) {
         if (options.ext === "webp") {
             let file = options.path.split('.')
 
@@ -17,6 +17,5 @@ const utils = {
         return options
     }
 }
-
 
 module.exports = utils

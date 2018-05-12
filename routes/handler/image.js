@@ -9,7 +9,6 @@
  * @param {Response}    res         Objeto donde responderemos, enviando la informacion indicada. 
  * @param {Object}      options     Objeto donde almacenaremos todas las variables que necesitaremos.
  * @param {String}      folder      Parametro que indica la carpeta donde estara nuestras imagenes almacenadas.
- * @param {String}      subdolder   Parametro que indica la subcarpeta donde estara nuestras imagenes almacenadas.
  * @param {String}      file        Parametro que indica el nombre del archivo a procesar.
  * @param {String}      force       Query que indica si necesita la imagen forzada al tamaño indicado ignorando el AspectRatio.
  * @param {String}      ext         Query que indica si necesita la imagen en formato WEBP.
@@ -32,7 +31,7 @@ const mimeTypes = {
 }
 
 module.exports = (req, res) => {
-    const { params: { folder, subfolder, file } } = req
+    const { params: { folder, file } } = req
     let { query: { fit, force, ext } } = req
 
     if (ext === "" || ext === undefined) ext = "jpg"
@@ -42,8 +41,8 @@ module.exports = (req, res) => {
     if (force === 'force') `${nameFile[0]}_force`
     if (ext === 'webp') `${nameFile[0]}_webp`
 
-    let path = `${basePath}/${folder}/${subfolder}/${file}`
-    let key = `${basePath}/${folder}/${subfolder}/${nameFile.join('.')}`
+    let path = `${basePath}/${folder}/${file}`
+    let key = `${basePath}/${folder}/${nameFile.join('.')}`
 
     const options = {
         fit: fit,
