@@ -6,15 +6,15 @@
  * @param {String}      host        Nombre del dominio que utilizaremos.
  */
 
-const { port, host, redisPort} = require('./initServer').getArgvs()
+const { port, host, redisPort } = require('./initServer').getArgvs()
 
 const redis = require('redis')
 const client = redis.createClient(redisPort, host)
 
+const imageRoute = require('./routes/images')
+
 const express = require('express')
 const app = express()
-
-const imageRoute = require('./routes/images')
 
 app.use('/', imageRoute)
 

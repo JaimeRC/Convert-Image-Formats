@@ -15,7 +15,7 @@ var yargs = require('yargs')
 const argvs = {
 
     getArgvs() {
-        
+
         return yargs
             .usage('Usage: $0 <cmd> [options]')
             .option('port', {
@@ -35,20 +35,17 @@ const argvs = {
                 type: Number,
                 default: 6379
             })
-            .option('basePath',{
+            .option('basePath', {
                 alias: 'd',
                 describe: 'Introduce a Path Root',
                 type: String,
                 default: '/Users/jaimerc/WorkSpace/WorkSpace/RedisDB'
             })
-            .demandOption(['port', 'host', 'redisPort', 'basePath'], 'Please provide both port, host, redisPort and basePath arguments to work with this tool')
+            .demandOption(['port', 'host', 'redisPort', 'basePath'],
+                'Please provide both port, host, redisPort and basePath arguments to work with this tool')
             .help()
             .argv
     }
 }
 
 module.exports = argvs
-
-
-
-

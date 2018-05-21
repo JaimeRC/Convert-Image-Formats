@@ -3,7 +3,6 @@
  */
 
 const { host, redisPort } = require('../initServer').getArgvs()
-const utils = require('./utils')
 
 const redis = require('redis')
 const client = redis.createClient(redisPort, host, { return_buffers: true })
@@ -43,9 +42,11 @@ const logic = {
     setImage(options) {
         return new Promise((resolve, reject) => {
 
-            options = utils.setExtFileWebp(options)
+            const image = sharp(options.path)
 
-            sharp(options.path)
+            if(options.ext === 'webp') image.webp({ lossless: true })
+           
+            image
                 .toBuffer({ resolveWithObject: true })
                 .then(({ data, info }) => {
                     client.set(options.key, data, redis.print)
@@ -62,8 +63,6 @@ const logic = {
     setImageBySize(options) {
         return new Promise((resolve, reject) => {
 
-            options = utils.setExtFileWebp(option)
-            
             const image = sharp(options.path)
 
             if (options.force === 'true') {
@@ -71,6 +70,8 @@ const logic = {
             } else {
                 image.max()
             }
+            
+            if(options.ext === 'webp') image.webp({ lossless: true })
 
             image
                 .resize(options.width, options.height)
