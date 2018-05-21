@@ -5,7 +5,7 @@
  * con las opciones que nos pudieran pedir.
  * 
  * @param {Object}      mimeTypes   Objeto con todos los 'Content-Type' para la respuesta.
- * @param {Object}      req         Objeto donde recibiremos los parametros y/o las query.
+ * @param {Request}     req         Objeto donde recibiremos los parametros y/o las query.
  * @param {Response}    res         Objeto donde responderemos, enviando la informacion indicada. 
  * @param {Object}      options     Objeto donde almacenaremos todas las variables que necesitaremos.
  * @param {String}      folder      Parametro que indica la carpeta donde estara nuestras imagenes almacenadas.
@@ -32,20 +32,18 @@ const mimeTypes = {
 
 module.exports = (req, res) => {
     const { params: { folder, file } } = req
-    let { query: { fit, force, ext } } = req
+    let { query: { force, ext } } = req
 
     if (ext === "" || ext === undefined) ext = "jpg"
 
     let nameFile = file.split('.')
-    if (fit === 'true') `${nameFile[0]}_fit`
-    if (force === 'force') `${nameFile[0]}_force`
-    if (ext === 'webp') `${nameFile[0]}_webp`
+    if (force === 'force') nameFile[0] += "_force"
+    if (ext !== 'jpg') nameFile[0] += `_${ext}`
 
     let path = `${basePath}/${folder}/${file}`
     let key = `${basePath}/${folder}/${nameFile.join('.')}`
 
     const options = {
-        fit: fit,
         force: force,
         ext: ext,
         key: key,

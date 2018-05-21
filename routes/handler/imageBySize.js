@@ -5,7 +5,7 @@
  * con las medidas y/o opciones que nos pudieran pedir.
  * 
  * @param {Object}      mimeTypes   Objeto con todos los 'Content-Type' para la respuesta.
- * @param {Object}      req         Objeto donde recibiremos los parametros y/o las query.
+ * @param {Request}     req         Objeto donde recibiremos los parametros y/o las query.
  * @param {Response}    res         Objeto donde responderemos, enviando la informacion indicada. 
  * @param {Object}      options     Objeto donde almacenaremos todas las variables que necesitaremos.
  * @param {String}      size        Parametro con las medidas que se necesita procesar (ej. 800x500)
@@ -32,12 +32,11 @@ const mimeTypes = {
 
 module.exports = (req, res) => {
     const { params: { folder, file, size } } = req
-    let { query: { fit, ext } } = req
+    let { query: { force, ext } } = req
 
     if (ext === "" || ext === undefined) ext = "jpg"
 
     let nameFile = file.split('.')
-    if (fit === 'true') nameFile[0] += "_fit"
     if (force === 'true') nameFile[0] += "_force"
     if (ext !== 'jpg') nameFile[0] += "_" + ext
 
@@ -49,7 +48,6 @@ module.exports = (req, res) => {
     let height = parseInt(arraySize[1])
 
     const options = {
-        fit: fit,
         force: force,
         ext: ext,
         width: width,
