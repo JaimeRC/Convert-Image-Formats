@@ -71,3 +71,6 @@ redis-stable/
 # End of https://www.gitignore.io/api/node,redis
 
 package-lock.json
+
+.vscode/
+.idea/
